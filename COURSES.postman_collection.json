@@ -1,0 +1,309 @@
+{
+	"info": {
+		"_postman_id": "077f1291-bdff-444d-b218-3e4170f9490f",
+		"name": "COURSES",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18105575"
+	},
+	"item": [
+		{
+			"name": "CREATE COURSE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const jsonResponse = pm.response.json();\r",
+							"pm.globals.set(\"courseId\", jsonResponse.id);\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches course title\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Edikan Ekanem Postman Testing\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches course description\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Testing postman api\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches isPremium\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"true\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches course location\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"online\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Edikan Ekanem Postman Testing\",\n    \"categoryId\": 2,\n    \"description\": \"Testing postman api\",\n    \"courseUrl\": \"https://www.youtube.com/watch?v=8vXoMqWgbQQ\",\n    \"imageUrl\": \"https://source.unsplash.com/user/c_v_r/900x800\",\n    \"location\": \"online\",\n    \"isPremium\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/courses/",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LIST COURSES",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches course title\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"postman\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches course description\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"postman\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches isPremium\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"true\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches course location\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"online\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/api/courses",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET COURSE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches course title\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Edikan Ekanem Postman Testing\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches course description\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Testing postman api\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches isPremium\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"true\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches course location\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"online\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/courses/{{courseId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"{{courseId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE COURSE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches course title\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Edikan Ekanem Postman Edit\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches course description\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"Updating the course\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches isPremium\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"false\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Body matches course location\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"offline\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\" : \"Edikan Ekanem Postman Edit\",\n    \"categoryId\" : 3,\n    \"description\" : \"Updating the course\",\n    \"courseUrl\" : \"London Lagos Los Angeles\",\n    \"imageUrl\" : \"https://source.unsplash.com/user/c_v_r/900x800\",\n    \"location\": \"offline\",\n    \"isPremium\": false\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/courses/{{courseId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"{{courseId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE COURSE",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/api/courses/{{courseId}}",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"api",
+						"courses",
+						"{{courseId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
